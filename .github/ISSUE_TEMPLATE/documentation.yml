@@ -1,7 +1,7 @@
 name: 📝 Documentation
 description: 문서 수정 요청
-title: '[docs] '
-labels: ['documentation', 'docs']
+title: 'docs: '
+labels: ['docs']
 body:
   - type: markdown
     attributes:

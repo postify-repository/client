@@ -1,7 +1,7 @@
 name: 🚀 Feature Request
 description: 새로운 기능 추가 요청
-title: '[feat] '
-labels: ['enhancement', 'feat']
+title: 'feat: '
+labels: ['feat']
 body:
   - type: markdown
     attributes:
