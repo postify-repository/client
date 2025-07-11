@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
+import Container from "@/components/layout/Container";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,13 +31,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div className="w-full min-h-screen bg-[#f8f9fa]">
-          <div className="max-w-[1300px] mx-auto relative px-4 sm:px-6 lg:px-8">
+          <Container>
             {/* 로고, 검색, 알림, 로그인 */}
             <Header />
             {/* 탭 네비게이션 */}
             <Navigation />
             <main>{children}</main>
-          </div>
+          </Container>
         </div>
       </body>
     </html>
