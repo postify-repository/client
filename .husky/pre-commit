@@ -1,0 +1,10 @@
+# 린트 및 포맷팅 실행
+npx lint-staged
+
+# 타입 체크
+npm run build --dry-run 2>/dev/null || {
+  echo "🔍 TypeScript 타입 체크 실행 중..."
+  npx tsc --noEmit
+}
+
+echo "✅ Pre-commit 검사 통과!"
