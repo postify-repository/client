@@ -16,7 +16,7 @@ export default function Profile() {
       <DropdownMenuTrigger asChild>
         <div className="flex items-center gap-2 cursor-pointer ml-3 group">
           <button className="h-10 w-10 rounded-full bg-gray-400 cursor-pointer" />
-          <ChevronDownIcon className="size-4 text-gray-400 group-hover:text-gray-900" />
+          <ChevronDownIcon className="size-4 text-tertiary group-hover:text-primary" />
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent

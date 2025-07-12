@@ -5,7 +5,7 @@ function Logo() {
     <div className="flex items-center">
       <Link
         href="/"
-        className="flex items-center font-mono text-2xl font-semibold text-gray-900"
+        className="flex items-center font-mono text-2xl font-semibold"
       >
         Postify
       </Link>
