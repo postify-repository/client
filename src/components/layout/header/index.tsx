@@ -1,11 +1,11 @@
 "use client";
 
-import LoginButton from "@/components/layout/header/login-button";
-import Logo from "@/components/layout/header/logo";
-import NotiIcon from "@/components/layout/header/noti-icon";
-import Profile from "@/components/layout/header/profile";
-import SearchIcon from "@/components/layout/header/search-icon";
-import WriteButton from "@/components/layout/header/write-button";
+import LoginButton from "@/components/layout/header/LoginButton";
+import Logo from "@/components/layout/header/Logo";
+import NotiIcon from "@/components/layout/header/NotiIcon";
+import Profile from "@/components/layout/header/Profile";
+import SearchIcon from "@/components/layout/header/SearchIcon";
+import WriteButton from "@/components/layout/header/WriteButton";
 import LoginModal from "@/components/login-modal";
 import { useState } from "react";
 
