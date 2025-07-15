@@ -1,6 +1,6 @@
 "use client";
 
-import MainContent from "@/components/common/main-content";
+import MainContent from "@/components/common/MainContent";
 import ActionButton from "@/components/notifications/ActionButton";
 import ReadFilterButton from "@/components/notifications/ReadFilterButton";
 
