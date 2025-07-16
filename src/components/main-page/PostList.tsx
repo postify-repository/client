@@ -1,13 +1,15 @@
-import { PostListProps } from "@/types/post";
-import PostCard from "../post/PostCard";
-import SkeletonCard from "../post/SkeletonCard";
-import EmptyPostInfo from "../post/EmptyPostInfo";
+import { PostCardProps } from "@/types/post";
+import SkeletonCard from "@/components/post/SkeletonCard";
+import EmptyPostInfo from "@/components/post/EmptyPostInfo";
+import PostCard from "@/components/post/PostCard";
 
-interface PostListWithLoadingProps extends PostListProps {
+export default function PostList({
+  posts,
+  loading,
+}: {
+  posts: PostCardProps[];
   loading: boolean;
-}
-
-export default function PostList({ posts, loading }: PostListWithLoadingProps) {
+}) {
   if (loading) {
     return (
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">

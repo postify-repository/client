@@ -1,19 +1,17 @@
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Button } from "../ui/button";
 import Link from "next/link";
 
 export default function EmptyPostInfo() {
   return (
-    <div className="flex flex-col items-center justify-center py-10 h-full">
+    <div className="flex flex-col items-center justify-center py-10 h-full gap-10">
       <Image
-        src="/findAuthorImg.jpg"
+        src="/findAuthorImg.svg"
         alt="empty-post"
-        width={500}
-        height={500}
-        className="mb-10"
+        width={400}
+        height={400}
       />
-      {/* Link 수정 예정 */}
-      <Link href="/trending">
+      <Link href="/authors">
         <Button
           variant="outline"
           className="w-40 bg-menu-hover-text text-white font-bold"

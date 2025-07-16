@@ -1,15 +1,12 @@
 export interface PostCardProps {
   postId: string;
   title: string;
-  description: string;
-  imageUrl: string;
-  date: string;
-  commentCount: number;
-  authorName: string;
-  authorAvatar: string;
-  likeCount: number;
-}
-
-export interface PostListProps {
-  posts: PostCardProps[];
+  content: string;
+  postImage: string;
+  totalLike: number;
+  totalComment: number;
+  userName: string;
+  userId: string;
+  userImage: string;
+  createdAt: number;
 }
