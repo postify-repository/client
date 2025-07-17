@@ -14,10 +14,10 @@ import { NAV_ITEMS, TRENDING_FILTER } from "@/constants/navigation";
 export default function Navigation() {
   const pathname = usePathname();
   const params = useParams();
-  const isTrending = pathname.startsWith("/trending");
-  const currentFilter = TRENDING_FILTER.find(
-    (filter) => filter.value === params.filter,
-  );
+  const isTrending = pathname.startsWith("/trending") || pathname === "/";
+  const currentFilter =
+    TRENDING_FILTER.find((filter) => filter.value === params.filter) ||
+    TRENDING_FILTER.find((filter) => filter.value === "week"); // 기본값으로 "이번 주" 설정
 
   return (
     <nav className="w-full flex justify-between items-center h-16 mb-8">
@@ -27,6 +27,7 @@ export default function Navigation() {
             key={item.label}
             href={item.href}
             className={`flex items-center gap-2 p-2 ${
+              (pathname === "/" && item.label === "트렌딩") ||
               pathname.startsWith(item.href)
                 ? "text-primary border-b-2 border-primary"
                 : "text-gray-500"
