@@ -9,7 +9,7 @@ import {
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useParams } from "next/navigation";
-import { NAV_ITEMS, TRENDING_FILTER } from "@/constants/navigation-constants";
+import { NAV_ITEMS, TRENDING_FILTER } from "@/constants/navigation";
 
 export default function Navigation() {
   const pathname = usePathname();
@@ -32,7 +32,7 @@ export default function Navigation() {
                 : "text-gray-500"
             }`}
           >
-            <item.icon className="size-4" />
+            <item.Icon className="size-4" />
             {item.label}
           </Link>
         ))}

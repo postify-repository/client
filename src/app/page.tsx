@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import TrendingPage from "@/app/(post)/trending/[filter]/page";
 
 export default function Home() {
-  redirect("/trending/week");
+  return <TrendingPage />;
 }

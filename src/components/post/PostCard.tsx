@@ -7,8 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { PostCardProps } from "@/types/post";
-import { stampToTime } from "@/utils/stampToTime";
+import type { PostCardType } from "@/types/post";
+
 import { HeartIcon } from "lucide-react";
 import Image from "next/image";
 
@@ -23,7 +23,10 @@ export default function PostCard({
   userId,
   userImage,
   createdAt,
-}: PostCardProps) {
+}: PostCardType) {
+  const createdDate = Intl.DateTimeFormat("ko-KR", {
+    dateStyle: "long",
+  }).format(new Date(createdAt));
   return (
     <div className="col-span-1 w-full hover:-translate-y-3 transition-all duration-200">
       <Card key={postId} className="!rounded-none !p-0 !gap-0">
@@ -36,7 +39,7 @@ export default function PostCard({
             {content}
           </CardDescription>
           <div className="flex items-center gap-2 text-xs text-gray-500">
-            <div>{stampToTime(createdAt)}</div>
+            <div>{createdDate}</div>
             <div>|</div>
             <div>{totalComment}개의 댓글</div>
           </div>

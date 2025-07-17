@@ -1,7 +1,7 @@
 "use client";
 
 import PostList from "@/components/main-page/PostList";
-import { filterPost } from "@/utils/filterPost";
+import { filterPost } from "@/utils/postFilterUtils";
 import { useParams } from "next/navigation";
 
 const dummyPosts = [
@@ -61,7 +61,7 @@ const dummyPosts = [
 
 export default function TrendingPage() {
   const params = useParams();
-  const filter = params.filter as string;
+  const filter = (params.filter as string) || "week";
 
   const filteredData = filterPost({
     filter,

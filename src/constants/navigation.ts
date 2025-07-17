@@ -4,17 +4,17 @@ export const NAV_ITEMS = [
   {
     label: "트렌딩",
     href: "/trending",
-    icon: ChartNoAxesCombined,
+    Icon: ChartNoAxesCombined,
   },
   {
     label: "최신",
     href: "/recent",
-    icon: Clock,
+    Icon: Clock,
   },
   {
     label: "피드",
     href: "/feed",
-    icon: Rss,
+    Icon: Rss,
   },
 ];
 

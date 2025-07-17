@@ -2,8 +2,7 @@ import Container from "@/components/common/Container";
 import Header from "@/components/layout/header";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { ConditionalNavigation } from "@/components/layout/navbar";
+import "@/app/globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,7 +31,6 @@ export default function RootLayout({
       >
         <Container>
           <Header />
-          <ConditionalNavigation />
           <main>{children}</main>
         </Container>
       </body>
