@@ -22,19 +22,19 @@ export default function Navigation() {
   return (
     <nav className="w-full flex justify-between items-center h-16 mb-8">
       <div className="flex items-center gap-4">
-        {NAV_ITEMS.map((item) => (
+        {NAV_ITEMS.map(({ label, href, Icon }) => (
           <Link
-            key={item.label}
-            href={item.href}
+            key={label}
+            href={href}
             className={`flex items-center gap-2 p-2 ${
-              (pathname === "/" && item.label === "트렌딩") ||
-              pathname.startsWith(item.href)
+              (pathname === "/" && label === "트렌딩") ||
+              pathname.startsWith(href)
                 ? "text-primary border-b-2 border-primary"
                 : "text-gray-500"
             }`}
           >
-            <item.Icon className="size-4" />
-            {item.label}
+            <Icon className="size-4" />
+            {label}
           </Link>
         ))}
       </div>
