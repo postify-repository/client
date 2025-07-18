@@ -1,10 +1,10 @@
-import type { PostCardType } from "@/types/post";
+import type { PostType } from "@/types/post";
 import SkeletonCard from "@/components/post/SkeletonCard";
 import EmptyPostInfo from "@/components/post/EmptyPostInfo";
 import PostCard from "@/components/post/PostCard";
 
 interface PostListProps {
-  posts: PostCardType[];
+  posts: PostType[];
   loading: boolean;
 }
 
@@ -26,7 +26,7 @@ export default function PostList({ posts, loading }: PostListProps) {
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
       {posts.map((post) => (
-        <PostCard key={post.postId} {...post} />
+        <PostCard key={post.postId} post={post} />
       ))}
     </div>
   );

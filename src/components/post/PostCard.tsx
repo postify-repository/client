@@ -7,23 +7,28 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import type { PostCardType } from "@/types/post";
+import type { PostType } from "@/types/post";
 
 import { HeartIcon } from "lucide-react";
 import Image from "next/image";
 
-export default function PostCard({
-  title,
-  postId,
-  content,
-  postImage,
-  totalLike,
-  totalComment,
-  userName,
-  userId,
-  userImage,
-  createdAt,
-}: PostCardType) {
+interface PostCardProps {
+  post: PostType;
+}
+
+export default function PostCard({ post }: PostCardProps) {
+  const {
+    title,
+    postId,
+    content,
+    postImage,
+    totalLike,
+    totalComment,
+    userName,
+    userId,
+    userImage,
+    createdAt,
+  } = post;
   const createdDate = Intl.DateTimeFormat("ko-KR", {
     dateStyle: "long",
   }).format(new Date(createdAt));

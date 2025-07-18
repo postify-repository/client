@@ -1,4 +1,4 @@
-export interface PostCardType {
+export interface PostType {
   postId: string;
   title: string;
   content: string;

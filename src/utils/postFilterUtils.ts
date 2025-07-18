@@ -1,5 +1,5 @@
 import { TRENDING_FILTER } from "@/constants/navigation";
-import type { PostCardType } from "@/types/post";
+import type { PostType } from "@/types/post";
 import dayjs from "dayjs";
 
 /**
@@ -19,7 +19,7 @@ export const filterPost = ({
   dummyPosts,
 }: {
   filter: string;
-  dummyPosts: PostCardType[];
+  dummyPosts: PostType[];
 }) => {
   const isValid = TRENDING_FILTER.map((item) => item.value).includes(filter);
 
