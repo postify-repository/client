@@ -47,6 +47,7 @@
   --color-medium: var(--medium);
   --color-green: var(--green);
   --color-gray-green: var(--gray-green);
+  --color-github: var(--github);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -106,6 +107,9 @@
   /* 초록색 */
   --green: #12b886;
   --gray-green: #e9f3f2;
+
+  /* 로고 */
+  --github: #262e32;
 }
 
 .dark {
