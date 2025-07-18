@@ -1,7 +1,11 @@
+import TrendingPage from "@/app/(postview)/trending/[filter]/page";
+import Navigation from "@/components/layout/navbar";
+
 export default function Home() {
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
+    <>
+      <Navigation />
+      <TrendingPage />
+    </>
   );
 }
