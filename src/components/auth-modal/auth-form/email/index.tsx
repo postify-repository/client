@@ -1,7 +1,7 @@
 "use client";
 
 import EmailInput from "@/components/auth-modal/auth-form/email/EmailInput";
-import ErrorMessage from "@/components/auth-modal/auth-form/email/ErrorMessage";
+import ServerErrorMessage from "@/components/auth-modal/auth-form/email/ErrorMessage";
 import SubmitButton from "@/components/auth-modal/auth-form/email/SubmitButton";
 import { Form } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -64,7 +64,7 @@ export default function EmailAuthSection({
             />
           </div>
 
-          <ErrorMessage control={form.control} errors={form.formState.errors} />
+          <ServerErrorMessage errors={form.formState.errors} />
         </div>
       </form>
     </Form>

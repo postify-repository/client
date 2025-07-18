@@ -1,4 +1,9 @@
-import { FormControl, FormField, FormItem } from "@/components/ui/form";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Control, FieldErrors } from "react-hook-form";
 
@@ -23,6 +28,7 @@ export default function EmailInput({ control, errors }: EmailInputProps) {
               aria-invalid={!!errors.email}
             />
           </FormControl>
+          <FormMessage />
         </FormItem>
       )}
     />
