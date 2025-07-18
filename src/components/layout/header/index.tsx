@@ -1,17 +1,17 @@
 "use client";
 
+import AuthModal from "@/components/auth-modal";
 import LoginButton from "@/components/layout/header/LoginButton";
 import Logo from "@/components/layout/header/Logo";
 import NotiIcon from "@/components/layout/header/NotiIcon";
 import Profile from "@/components/layout/header/Profile";
 import SearchIcon from "@/components/layout/header/SearchIcon";
 import WriteButton from "@/components/layout/header/WriteButton";
-import LoginModal from "@/components/login-modal";
 import { useState } from "react";
 
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   return (
     <>
@@ -20,7 +20,7 @@ export default function Header() {
         <div className="flex items-center gap-2">
           <NotiIcon
             isLoggedIn={isLoggedIn}
-            onLoginRequired={() => setIsLoginModalOpen(true)}
+            onLoginRequired={() => setIsAuthModalOpen(true)}
           />
           <SearchIcon />
 
@@ -33,14 +33,14 @@ export default function Header() {
             <LoginButton
               onClick={() => {
                 setIsLoggedIn(true);
-                setIsLoginModalOpen(true);
+                setIsAuthModalOpen(true);
               }}
             />
           )}
         </div>
       </header>
 
-      <LoginModal open={isLoginModalOpen} onOpenChange={setIsLoginModalOpen} />
+      <AuthModal open={isAuthModalOpen} onOpenChange={setIsAuthModalOpen} />
     </>
   );
 }
