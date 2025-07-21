@@ -21,7 +21,7 @@ export default function WritePage() {
         />
         {/* 태그 */}
         <div className="flex gap-2 w-full">
-          <div className="flex items-center gap-2 w-full flex-wrap">
+          <div className="flex items-center gap-2 w-full">
             <div className="flex items-center gap-2 justify-start flex-wrap w-auto">
               {tagItems.map((tag, index) => (
                 <PostTag
@@ -32,21 +32,24 @@ export default function WritePage() {
                   setTagItems={setTagItems}
                 />
               ))}
-            </div>
-            <input
-              placeholder="태그를 입력하세요."
-              className="flex-1 w-full py-1 focus:outline-none"
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && e.currentTarget.value.trim() !== "") {
-                  e.preventDefault();
-                  const newTag = e.currentTarget.value.trim().toLowerCase();
-                  if (!tagItems.includes(newTag)) {
-                    setTagItems([...tagItems, newTag]);
+              <input
+                placeholder="태그를 입력하세요."
+                className="flex-1 w-full py-1 focus:outline-none"
+                onKeyDown={(e) => {
+                  if (
+                    e.key === "Enter" &&
+                    e.currentTarget.value.trim() !== ""
+                  ) {
+                    e.preventDefault();
+                    const newTag = e.currentTarget.value.trim().toLowerCase();
+                    if (!tagItems.includes(newTag)) {
+                      setTagItems([...tagItems, newTag]);
+                    }
+                    e.currentTarget.value = "";
                   }
-                  e.currentTarget.value = "";
-                }
-              }}
-            />
+                }}
+              />
+            </div>
           </div>
         </div>
         {/* 내용 */}
