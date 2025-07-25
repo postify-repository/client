@@ -19,14 +19,18 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import CodeMirror from "@uiw/react-codemirror";
+import CodeMirror, { EditorView } from "@uiw/react-codemirror";
 
 export default function WritePage() {
   const [tagItems, setTagItems] = useState<string[]>([]);
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [code, setCode] = useState<string>("");
-
+  const theme = EditorView.theme({
+    "&.cm-focused": {
+      outline: "none",
+    },
+  });
   return (
     <WriteContainer>
       <div className="w-1/2 bg-orange-100 flex flex-col gap-3 px-2 relative">
@@ -40,7 +44,7 @@ export default function WritePage() {
         {/* 태그 */}
         <div className="flex gap-2 w-full">
           <div className="flex items-center gap-2 w-full">
-            <div className="flex items-center gap-2 justify-start flex-wrap w-auto">
+            <div className="flex items-center gap-2 justify-start flex-wrap w-full">
               {tagItems.map((tag, index) => (
                 <PostTag
                   key={index}
@@ -129,6 +133,7 @@ export default function WritePage() {
                 highlightActiveLine: false,
                 highlightSelectionMatches: false,
               }}
+              extensions={[theme]}
             />
           </div>
         </div>
