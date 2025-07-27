@@ -1,17 +1,17 @@
 "use client";
 
-import EmailAuthSection from "@/components/auth-modal/auth-form/email";
+import LoginForm from "@/components/auth-modal/auth-form/login";
+import SignupForm from "@/components/auth-modal/auth-form/signup";
 import SocialAuthSection from "@/components/auth-modal/auth-form/social";
+import { useModalStore } from "@/stores/modalStore";
 
-interface AuthFormProps {
-  isLoginMode: boolean;
-}
+export default function AuthForm() {
+  const { authModalMode } = useModalStore();
 
-export default function AuthForm({ isLoginMode }: AuthFormProps) {
   return (
     <>
-      <EmailAuthSection isLoginMode={isLoginMode} />
-      <SocialAuthSection isLoginMode={isLoginMode} />
+      {authModalMode === "login" ? <LoginForm /> : <SignupForm />}
+      <SocialAuthSection />
     </>
   );
 }
