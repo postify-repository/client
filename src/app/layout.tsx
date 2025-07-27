@@ -1,8 +1,9 @@
+import "@/app/globals.css";
 import Container from "@/components/common/Container";
 import Header from "@/components/layout/header";
+import TanStackProvider from "@/providers/TanStackProvider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "@/app/globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,10 +30,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-page text-primary`}
       >
-        <Container>
-          <Header />
-          <main>{children}</main>
-        </Container>
+        <TanStackProvider>
+          <Container>
+            <Header />
+            <main>{children}</main>
+          </Container>
+        </TanStackProvider>
       </body>
     </html>
   );
