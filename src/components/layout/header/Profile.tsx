@@ -1,5 +1,3 @@
-"use client";
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,10 +5,18 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { HEADER_DROPDOWN_MENU_ITEMS } from "@/constants/header-dropdown";
+import { useLogout } from "@/hooks/auth/useLogout";
 import { ChevronDownIcon } from "lucide-react";
 import Link from "next/link";
 
 export default function Profile() {
+  const { mutate } = useLogout();
+
+  const handleLogout = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    mutate();
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -30,7 +36,13 @@ export default function Profile() {
             className="cursor-pointer p-3 text-md hover:!bg-menu-hover-bg hover:!text-menu-hover-text transition-colors"
             asChild
           >
-            <Link href={item.href}>{item.label}</Link>
+            {item.label === "로그아웃" ? (
+              <Link href={item.href} onClick={handleLogout}>
+                {item.label}
+              </Link>
+            ) : (
+              <Link href={item.href}>{item.label}</Link>
+            )}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
