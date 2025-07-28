@@ -3,29 +3,19 @@
 import WriteContainer from "@/components/common/WriteContainer";
 import PostTag from "@/components/post/PostTag";
 import { Button } from "@/components/ui/button";
-import {
-  ArrowLeft,
-  Bold,
-  Code,
-  Heading1,
-  Heading2,
-  Heading3,
-  Heading4,
-  Image,
-  Italic,
-  Link,
-  Quote,
-  Strikethrough,
-} from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import CodeMirror, { EditorView } from "@uiw/react-codemirror";
+import Toolbar from "@/components/write/toolbar";
 
 export default function WritePage() {
   const [tagItems, setTagItems] = useState<string[]>([]);
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [code, setCode] = useState<string>("");
+  const editorRef = useRef<EditorView | null>(null);
+  const view = editorRef.current;
   const theme = EditorView.theme({
     "&.cm-focused": {
       outline: "none",
@@ -76,50 +66,7 @@ export default function WritePage() {
         </div>
         {/* 내용 */}
         <div>
-          <div
-            id="toolbar"
-            className="w-full flex flex-wrap gap-10 text-gray-500 items-center mb-5"
-          >
-            <div id="toolbar-heading" className="flex gap-2">
-              <div className="flex items-center justify-center p-2 cursor-pointer hover:text-black hover:bg-gray-100/50">
-                <Heading1 />
-              </div>
-              <div className="flex items-center justify-center p-2 cursor-pointer hover:text-black hover:bg-gray-100/50">
-                <Heading2 />
-              </div>
-              <div className="flex items-center justify-center p-2 cursor-pointer hover:text-black hover:bg-gray-100/50">
-                <Heading3 />
-              </div>
-              <div className="flex items-center justify-center p-2 cursor-pointer hover:text-black hover:bg-gray-100/50">
-                <Heading4 />
-              </div>
-            </div>
-            <div id="toolbar-word" className="flex gap-2">
-              <div className="flex items-center justify-center p-2 cursor-pointer hover:text-black hover:bg-gray-100/50">
-                <Bold />
-              </div>
-              <div className="flex items-center justify-center p-2 cursor-pointer hover:text-black hover:bg-gray-100/50">
-                <Italic />
-              </div>
-              <div className="flex items-center justify-center p-2 cursor-pointer hover:text-black hover:bg-gray-100/50">
-                <Strikethrough />
-              </div>
-            </div>
-            <div id="toolbar-etc" className="flex gap-2">
-              <div className="flex items-center justify-center p-2 cursor-pointer hover:text-black hover:bg-gray-100/50">
-                <Quote />
-              </div>
-              <div className="flex items-center justify-center p-2 cursor-pointer hover:text-black hover:bg-gray-100/50">
-                <Image />
-              </div>
-              <div className="flex items-center justify-center p-2 cursor-pointer hover:text-black hover:bg-gray-100/50">
-                <Link />
-              </div>
-              <div className="flex items-center justify-center p-2 cursor-pointer hover:text-black hover:bg-gray-100/50">
-                <Code />
-              </div>
-            </div>
-          </div>
+          <Toolbar view={view!} />
           <div>
             <CodeMirror
               value={code}
@@ -134,6 +81,9 @@ export default function WritePage() {
                 highlightSelectionMatches: false,
               }}
               extensions={[theme]}
+              onCreateEditor={(view) => {
+                editorRef.current = view;
+              }}
             />
           </div>
         </div>
