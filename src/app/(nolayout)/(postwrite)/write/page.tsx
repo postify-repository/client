@@ -58,6 +58,8 @@ export default function WritePage() {
                       setTagItems([...tagItems, newTag]);
                     }
                     e.currentTarget.value = "";
+                  } else if (e.key === "Backspace" && tagItems.length > 0) {
+                    setTagItems(tagItems.slice(0, -1));
                   }
                 }}
               />
