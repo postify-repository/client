@@ -9,7 +9,7 @@ import {
 export const authApi = {
   refreshToken: async (): Promise<string> => {
     const response = await publicApi.post(`/auth/refresh-token`);
-    return response.data;
+    return response.data.accessToken;
   },
   checkEmail: async (email: string) => {
     const response = await publicApi.post(`/auth/email-check`, { email });

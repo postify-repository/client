@@ -5,6 +5,7 @@ import axios from "axios";
 
 // 토큰 관련 함수들을 store에서 가져오기
 const getToken = () => useAuthStore.getState().getToken();
+const setToken = (token: string) => useAuthStore.getState().setToken(token);
 const removeToken = () => useAuthStore.getState().removeToken();
 const refreshToken = () => authApi.refreshToken();
 
@@ -60,6 +61,7 @@ privateApi.interceptors.response.use(
           if (newAccessToken) {
             // 원래 요청에 새 토큰으로 재시도
             originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+            setToken(newAccessToken);
             return privateApi(originalRequest);
           }
         }
