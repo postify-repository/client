@@ -8,6 +8,9 @@ import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import CodeMirror, { EditorView } from "@uiw/react-codemirror";
 import Toolbar from "@/components/write/toolbar";
+import ReactMarkdown from "react-markdown";
+import remarkBreaks from "remark-breaks";
+import { headingStyler } from "@/lib/editor/headingStyler";
 
 export default function WritePage() {
   const [tagItems, setTagItems] = useState<string[]>([]);
@@ -20,13 +23,31 @@ export default function WritePage() {
     "&.cm-focused": {
       outline: "none",
     },
+    "&": {
+      fontSize: "16px",
+    },
+    ".cm-heading": {
+      fontWeight: "bold",
+    },
+    ".cm-heading-1": {
+      fontSize: "2.5rem",
+    },
+    ".cm-heading-2": {
+      fontSize: "2rem",
+    },
+    ".cm-heading-3": {
+      fontSize: "1.5rem",
+    },
+    ".cm-heading-4": {
+      fontSize: "1.25rem",
+    },
   });
   return (
     <WriteContainer>
-      <div className="w-1/2 bg-orange-100 flex flex-col gap-3 px-2 relative">
+      <div className="w-1/2 flex flex-col gap-3 px-2 relative">
         {/* 제목 */}
         <input
-          placeholder="제목을 입력하세요."
+          placeholder="제목을 입력하세요"
           className="w-full h-20 text-4xl font-bold focus:outline-none"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -45,7 +66,7 @@ export default function WritePage() {
                 />
               ))}
               <input
-                placeholder="태그를 입력하세요."
+                placeholder="태그를 입력하세요"
                 className="flex-1 w-full py-1 focus:outline-none"
                 onKeyDown={(e) => {
                   if (
@@ -73,7 +94,7 @@ export default function WritePage() {
             <CodeMirror
               value={code}
               onChange={(value) => setCode(value)}
-              placeholder="내용을 입력하세요."
+              placeholder="내용을 입력하세요"
               theme="none"
               maxHeight="65vh"
               basicSetup={{
@@ -82,7 +103,7 @@ export default function WritePage() {
                 highlightActiveLine: false,
                 highlightSelectionMatches: false,
               }}
-              extensions={[theme]}
+              extensions={[theme, headingStyler]}
               onCreateEditor={(view) => {
                 editorRef.current = view;
               }}
@@ -108,9 +129,13 @@ export default function WritePage() {
           </div>
         </div>
       </div>
-      <div className="w-1/2 bg-green-500 flex flex-col gap-3 px-2 ">
-        <div className="tw-full h-20 text-4xl font-bold">{title}</div>
-        <div className="text-lg">내용</div>
+      <div className="w-1/2 flex flex-col gap-3 px-2">
+        <div className="w-full h-20 text-4xl font-bold flex items-center">
+          {title}
+        </div>
+        <div className="markdown-viewer">
+          <ReactMarkdown remarkPlugins={[remarkBreaks]}>{code}</ReactMarkdown>
+        </div>
       </div>
     </WriteContainer>
   );
