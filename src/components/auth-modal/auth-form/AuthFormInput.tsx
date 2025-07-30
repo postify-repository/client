@@ -5,27 +5,36 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Control, FieldErrors } from "react-hook-form";
+import { FieldErrors, useFormContext } from "react-hook-form";
 
-interface EmailInputProps {
-  control: Control<{ email: string }>;
-  errors: FieldErrors<{ email: string }>;
+interface AuthFormInputProps {
+  errors: FieldErrors;
+  name: string;
+  type: string;
+  placeholder: string;
 }
 
-export default function EmailInput({ control, errors }: EmailInputProps) {
+export default function AuthFormInput({
+  errors,
+  name,
+  type,
+  placeholder,
+}: AuthFormInputProps) {
+  const form = useFormContext();
+
   return (
     <FormField
-      control={control}
-      name="email"
+      control={form.control}
+      name={name}
       render={({ field }) => (
         <FormItem className="flex-1">
           <FormControl>
             <Input
-              type="email"
-              placeholder="이메일을 입력하세요."
+              type={type}
+              placeholder={placeholder}
               {...field}
               className="shadow-none rounded-none placeholder:text-tertiary placeholder:text-md h-12 focus-visible:ring-0 focus:border-green focus-visible:border-green"
-              aria-invalid={!!errors.email}
+              aria-invalid={!!errors[name]}
             />
           </FormControl>
           <FormMessage />

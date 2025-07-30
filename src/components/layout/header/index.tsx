@@ -7,11 +7,20 @@ import NotiIcon from "@/components/layout/header/NotiIcon";
 import Profile from "@/components/layout/header/Profile";
 import SearchIcon from "@/components/layout/header/SearchIcon";
 import WriteButton from "@/components/layout/header/WriteButton";
-import { useState } from "react";
+import { useAuthStore } from "@/stores/authStore";
+import { useModalStore } from "@/stores/modalStore";
+import { usePathname } from "next/navigation";
+
+const HIDDEN_HEADER_PATHS = ["/signup"];
 
 export default function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const pathname = usePathname();
+  const { isAuthenticated } = useAuthStore();
+  const { openAuthModal } = useModalStore();
+
+  if (HIDDEN_HEADER_PATHS.includes(pathname)) {
+    return null;
+  }
 
   return (
     <>
@@ -19,12 +28,12 @@ export default function Header() {
         <Logo />
         <div className="flex items-center gap-2">
           <NotiIcon
-            isLoggedIn={isLoggedIn}
-            onLoginRequired={() => setIsAuthModalOpen(true)}
+            isLoggedIn={isAuthenticated}
+            onLoginRequired={() => openAuthModal("login")}
           />
           <SearchIcon />
 
-          {isLoggedIn ? (
+          {isAuthenticated ? (
             <>
               <WriteButton />
               <Profile />
@@ -32,15 +41,14 @@ export default function Header() {
           ) : (
             <LoginButton
               onClick={() => {
-                setIsLoggedIn(true);
-                setIsAuthModalOpen(true);
+                openAuthModal("login");
               }}
             />
           )}
         </div>
       </header>
 
-      <AuthModal open={isAuthModalOpen} onOpenChange={setIsAuthModalOpen} />
+      <AuthModal />
     </>
   );
 }
