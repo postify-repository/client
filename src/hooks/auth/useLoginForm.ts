@@ -2,7 +2,7 @@ import { useLogin } from "@/hooks/auth/useLogin";
 import { LoginFormData, LoginFormSchema } from "@/schemas/login.schema";
 import { useModalStore } from "@/stores/modalStore";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 export const useLoginForm = () => {
@@ -25,8 +25,12 @@ export const useLoginForm = () => {
       },
       onError: (error) => {
         if (error instanceof AxiosError) {
-          const { message, field } = error.response?.data;
-          form.setError(field, { message });
+          const errorMessage =
+            error.response?.status === axios.HttpStatusCode.Unauthorized
+              ? error.response?.data.message
+              : "알 수 없는 오류가 발생했습니다.";
+
+          form.setError("root.server", { message: errorMessage });
         }
       },
     });
