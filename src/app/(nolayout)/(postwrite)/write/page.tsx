@@ -11,6 +11,7 @@ import Toolbar from "@/components/write/toolbar";
 import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
 import { headingStyler } from "@/lib/editor/headingStyler";
+import { textStyler } from "@/lib/editor/textStyler";
 
 export default function WritePage() {
   const [tagItems, setTagItems] = useState<string[]>([]);
@@ -19,7 +20,7 @@ export default function WritePage() {
   const [code, setCode] = useState<string>("");
   const editorRef = useRef<EditorView | null>(null);
   const view = editorRef.current;
-  const theme = EditorView.theme({
+  const writeTheme = EditorView.theme({
     "&.cm-focused": {
       outline: "none",
     },
@@ -40,6 +41,12 @@ export default function WritePage() {
     },
     ".cm-heading-4": {
       fontSize: "1.25rem",
+    },
+    ".cm-italic": {
+      fontStyle: "italic",
+    },
+    ".cm-bold": {
+      fontWeight: "bold",
     },
   });
   return (
@@ -103,7 +110,7 @@ export default function WritePage() {
                 highlightActiveLine: false,
                 highlightSelectionMatches: false,
               }}
-              extensions={[theme, headingStyler]}
+              extensions={[writeTheme, headingStyler, textStyler]}
               onCreateEditor={(view) => {
                 editorRef.current = view;
               }}

@@ -75,7 +75,7 @@ export default function Toolbar({ view }: ToolbarProps) {
         {
           icon: <Italic />,
           onClick: () => {
-            toggleMarkdownStyle(view, { type: "inline", marker: "__" });
+            toggleMarkdownStyle(view, { type: "inline", marker: "_" });
           },
           label: "Italic",
         },
