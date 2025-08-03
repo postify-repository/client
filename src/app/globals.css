@@ -191,6 +191,22 @@
   font-size: 1.25rem;
 }
 
+.markdown-viewer blockquote {
+  margin: 1rem 0;
+  border-left: 4px solid var(--green);
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  margin-left: 0;
+}
+
+.markdown-viewer code {
+  display: block;
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  white-space: pre-wrap;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

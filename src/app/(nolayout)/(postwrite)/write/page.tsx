@@ -12,6 +12,7 @@ import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
 import { headingStyler } from "@/lib/editor/headingStyler";
 import { textStyler } from "@/lib/editor/textStyler";
+import remarkGfm from "remark-gfm";
 
 export default function WritePage() {
   const [tagItems, setTagItems] = useState<string[]>([]);
@@ -141,7 +142,9 @@ export default function WritePage() {
           {title}
         </div>
         <div className="markdown-viewer">
-          <ReactMarkdown remarkPlugins={[remarkBreaks]}>{code}</ReactMarkdown>
+          <ReactMarkdown remarkPlugins={[remarkBreaks, remarkGfm]}>
+            {code}
+          </ReactMarkdown>
         </div>
       </div>
     </WriteContainer>
