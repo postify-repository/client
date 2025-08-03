@@ -6,12 +6,14 @@ import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { EditorView } from "@uiw/react-codemirror";
-import Toolbar from "@/components/editor/toolbar";
-import WriteEditor from "@/components/editor/writeEditor";
-import ViewerEditorTitle from "@/components/editor/viewerEditorTitle";
-import ViewerEditorContent from "@/components/editor/viewerEditorContent";
-import TitleInput from "@/components/editor/titleInput";
-import TagInput from "@/components/editor/tagInput";
+import Toolbar from "@/components/editor/Toolbar";
+import WriteEditor from "@/components/editor/WriteEditor";
+import ViewerEditorTitle from "@/components/editor/ViewerEditorTitle";
+import ViewerEditorContent from "@/components/editor/ViewerEditorContent";
+import TitleInput from "@/components/editor/TitleInput";
+import TagInput from "@/components/editor/TagInput";
+import WriteEditorContainer from "@/components/common/WriteEditorContainer";
+import WritePreviewContainer from "@/components/common/WritePreviewContainer";
 
 export default function WritePage() {
   const [tagItems, setTagItems] = useState<string[]>([]);
@@ -21,7 +23,7 @@ export default function WritePage() {
   const [view, setView] = useState<EditorView | null>(null);
   return (
     <WriteContainer>
-      <div className="w-1/2 flex flex-col gap-3 px-2 relative">
+      <WriteEditorContainer>
         <TitleInput title={title} setTitle={setTitle} />
         <TagInput tagItems={tagItems} setTagItems={setTagItems} />
         <div>
@@ -50,11 +52,11 @@ export default function WritePage() {
             </Button>
           </div>
         </div>
-      </div>
-      <div className="w-1/2 flex flex-col gap-3 px-2">
+      </WriteEditorContainer>
+      <WritePreviewContainer>
         <ViewerEditorTitle title={title} />
         <ViewerEditorContent content={code} />
-      </div>
+      </WritePreviewContainer>
     </WriteContainer>
   );
 }
