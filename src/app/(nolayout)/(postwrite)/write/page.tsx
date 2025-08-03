@@ -5,51 +5,19 @@ import PostTag from "@/components/post/PostTag";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
-import CodeMirror, { EditorView } from "@uiw/react-codemirror";
-import Toolbar from "@/components/write/toolbar";
-import ReactMarkdown from "react-markdown";
-import remarkBreaks from "remark-breaks";
-import { headingStyler } from "@/lib/editor/headingStyler";
-import { textStyler } from "@/lib/editor/textStyler";
-import remarkGfm from "remark-gfm";
+import { useState } from "react";
+import { EditorView } from "@uiw/react-codemirror";
+import Toolbar from "@/components/editor/toolbar";
+import WriteEditor from "@/components/editor/writeEditor";
+import ViewerEditorTitle from "@/components/editor/viewerEditorTitle";
+import ViewerEditorContent from "@/components/editor/viewerEditorContent";
 
 export default function WritePage() {
   const [tagItems, setTagItems] = useState<string[]>([]);
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [code, setCode] = useState<string>("");
-  const editorRef = useRef<EditorView | null>(null);
-  const view = editorRef.current;
-  const writeTheme = EditorView.theme({
-    "&.cm-focused": {
-      outline: "none",
-    },
-    "&": {
-      fontSize: "16px",
-    },
-    ".cm-heading": {
-      fontWeight: "bold",
-    },
-    ".cm-heading-1": {
-      fontSize: "2.5rem",
-    },
-    ".cm-heading-2": {
-      fontSize: "2rem",
-    },
-    ".cm-heading-3": {
-      fontSize: "1.5rem",
-    },
-    ".cm-heading-4": {
-      fontSize: "1.25rem",
-    },
-    ".cm-italic": {
-      fontStyle: "italic",
-    },
-    ".cm-bold": {
-      fontWeight: "bold",
-    },
-  });
+  const [view, setView] = useState<EditorView | null>(null);
   return (
     <WriteContainer>
       <div className="w-1/2 flex flex-col gap-3 px-2 relative">
@@ -98,25 +66,11 @@ export default function WritePage() {
         {/* 내용 */}
         <div>
           <Toolbar view={view!} />
-          <div>
-            <CodeMirror
-              value={code}
-              onChange={(value) => setCode(value)}
-              placeholder="내용을 입력하세요"
-              theme="none"
-              maxHeight="65vh"
-              basicSetup={{
-                lineNumbers: false,
-                foldGutter: false,
-                highlightActiveLine: false,
-                highlightSelectionMatches: false,
-              }}
-              extensions={[writeTheme, headingStyler, textStyler]}
-              onCreateEditor={(view) => {
-                editorRef.current = view;
-              }}
-            />
-          </div>
+          <WriteEditor
+            code={code}
+            setCode={setCode}
+            onInitView={(view) => setView(view)}
+          />
         </div>
         {/* footer */}
         <div className="flex justify-between absolute bottom-3 left-0 right-0 px-2">
@@ -138,14 +92,8 @@ export default function WritePage() {
         </div>
       </div>
       <div className="w-1/2 flex flex-col gap-3 px-2">
-        <div className="w-full h-20 text-4xl font-bold flex items-center">
-          {title}
-        </div>
-        <div className="markdown-viewer">
-          <ReactMarkdown remarkPlugins={[remarkBreaks, remarkGfm]}>
-            {code}
-          </ReactMarkdown>
-        </div>
+        <ViewerEditorTitle title={title} />
+        <ViewerEditorContent content={code} />
       </div>
     </WriteContainer>
   );
