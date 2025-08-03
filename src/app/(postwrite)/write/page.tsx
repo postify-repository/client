@@ -1,9 +1,6 @@
 "use client";
 
 import WriteContainer from "@/components/common/WriteContainer";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { EditorView } from "@uiw/react-codemirror";
 import Toolbar from "@/components/editor/Toolbar";
@@ -14,10 +11,10 @@ import TitleInput from "@/components/editor/TitleInput";
 import TagInput from "@/components/editor/TagInput";
 import WriteEditorContainer from "@/components/common/WriteEditorContainer";
 import WritePreviewContainer from "@/components/common/WritePreviewContainer";
+import WriteFooter from "@/components/editor/WriteFooter";
 
 export default function WritePage() {
   const [tagItems, setTagItems] = useState<string[]>([]);
-  const router = useRouter();
   const [title, setTitle] = useState("");
   const [code, setCode] = useState<string>("");
   const [view, setView] = useState<EditorView | null>(null);
@@ -34,24 +31,7 @@ export default function WritePage() {
             onInitView={(view) => setView(view)}
           />
         </div>
-        {/* footer */}
-        <div className="flex justify-between absolute bottom-3 left-0 right-0 px-2">
-          <div
-            className="flex items-center gap-2 cursor-pointer"
-            onClick={() => router.back()}
-          >
-            <ArrowLeft />
-            <span>뒤로가기</span>
-          </div>
-          <div className="flex gap-2">
-            <Button className="bg-transparent text-green font-bold text-lg">
-              임시저장
-            </Button>
-            <Button className="bg-green-500 text-white font-bold text-lg">
-              출간하기
-            </Button>
-          </div>
-        </div>
+        <WriteFooter />
       </WriteEditorContainer>
       <WritePreviewContainer>
         <ViewerEditorTitle title={title} />
